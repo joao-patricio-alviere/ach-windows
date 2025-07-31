@@ -142,6 +142,42 @@ function formatDate(date) {
   }) + ' ET';
 }
 
+// Format date for UTC
+function formatDateUTC(date) {
+  return date.toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'UTC'
+  }) + ' UTC';
+}
+
+// Format date for Lisbon
+function formatDateLisbon(date) {
+  return date.toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'Europe/Lisbon'
+  }) + ' WEST';
+}
+
+// Format date for Denver
+function formatDateDenver(date) {
+  return date.toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'America/Denver'
+  }) + ' MDT';
+}
+
 // Update countdown timers
 function updateCountdowns() {
   const now = new Date();
@@ -153,12 +189,24 @@ function updateCountdowns() {
     
     const timerElement = document.querySelector(`#same-day-${index + 1}-timer .countdown-time`);
     const nextElement = document.querySelector(`#same-day-${index + 1}-next`);
+    const nextUTCElement = document.querySelector(`#same-day-${index + 1}-next-utc`);
+    const nextLisbonElement = document.querySelector(`#same-day-${index + 1}-next-lisbon`);
+    const nextDenverElement = document.querySelector(`#same-day-${index + 1}-next-denver`);
     
     if (timerElement) {
       timerElement.textContent = formatCountdown(timeRemaining);
     }
     if (nextElement) {
       nextElement.textContent = formatDate(deadline);
+    }
+    if (nextUTCElement) {
+      nextUTCElement.textContent = formatDateUTC(deadline);
+    }
+    if (nextLisbonElement) {
+      nextLisbonElement.textContent = formatDateLisbon(deadline);
+    }
+    if (nextDenverElement) {
+      nextDenverElement.textContent = formatDateDenver(deadline);
     }
   });
   
@@ -170,12 +218,24 @@ function updateCountdowns() {
     
     const timerElement = document.querySelector(`#next-day-${index + 1}-timer .countdown-time`);
     const nextElement = document.querySelector(`#next-day-${index + 1}-next`);
+    const nextUTCElement = document.querySelector(`#next-day-${index + 1}-next-utc`);
+    const nextLisbonElement = document.querySelector(`#next-day-${index + 1}-next-lisbon`);
+    const nextDenverElement = document.querySelector(`#next-day-${index + 1}-next-denver`);
     
     if (timerElement) {
       timerElement.textContent = formatCountdown(timeRemaining);
     }
     if (nextElement) {
       nextElement.textContent = formatDate(deadline);
+    }
+    if (nextUTCElement) {
+      nextUTCElement.textContent = formatDateUTC(deadline);
+    }
+    if (nextLisbonElement) {
+      nextLisbonElement.textContent = formatDateLisbon(deadline);
+    }
+    if (nextDenverElement) {
+      nextDenverElement.textContent = formatDateDenver(deadline);
     }
   });
 }

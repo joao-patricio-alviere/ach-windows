@@ -875,6 +875,14 @@ select.form-control {
   font-size: var(--font-size-sm);
 }
 
+.next-deadline-tz {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-normal);
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-mono);
+}
+
 .window-restriction {
   color: var(--color-warning);
   font-size: var(--font-size-xs);
