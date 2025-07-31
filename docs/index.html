@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ACH NACHA Window Tracker - Real-time countdown and processing schedule for ACH windows">
+    <meta name="keywords" content="ACH, NACHA, banking, payments, processing windows, countdown">
+    <title>ACH NACHA Window Tracker</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>ACH NACHA Window Tracker</h1>
+            <p class="header-subtitle">Real-time countdown and processing schedule</p>
+        </header>
+
+        <main>
+            <!-- Live Countdowns Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Live Countdowns</h2>
+                    <p class="section-description">Time remaining until next submission deadline</p>
+                </div>
+                
+                <div class="countdown-grid">
+                    <!-- Same Day Windows -->
+                    <div class="countdown-card same-day">
+                        <div class="countdown-header">
+                            <h3>Same Day Window 1</h3>
+                            <span class="window-type same-day-badge">Same Day</span>
+                        </div>
+                        <div class="countdown-timer" id="same-day-1-timer">
+                            <span class="countdown-time">--:--:--</span>
+                        </div>
+                        <div class="countdown-details">
+                            <p class="countdown-description">Morning same-day processing window</p>
+                            <p class="next-deadline">Next deadline (ET): <span id="same-day-1-next">--</span></p>
+                            <p class="next-deadline-tz">UTC: <span id="same-day-1-next-utc">--</span></p>
+                            <p class="next-deadline-tz">Lisbon: <span id="same-day-1-next-lisbon">--</span></p>
+                            <p class="next-deadline-tz">Denver: <span id="same-day-1-next-denver">--</span></p>
+                        </div>
+                    </div>
+
+                    <div class="countdown-card same-day">
+                        <div class="countdown-header">
+                            <h3>Same Day Window 2</h3>
+                            <span class="window-type same-day-badge">Same Day</span>
+                        </div>
+                        <div class="countdown-timer" id="same-day-2-timer">
+                            <span class="countdown-time">--:--:--</span>
+                        </div>
+                        <div class="countdown-details">
+                            <p class="countdown-description">Afternoon same-day processing window</p>
+                            <p class="next-deadline">Next deadline (ET): <span id="same-day-2-next">--</span></p>
+                            <p class="next-deadline-tz">UTC: <span id="same-day-2-next-utc">--</span></p>
+                            <p class="next-deadline-tz">Lisbon: <span id="same-day-2-next-lisbon">--</span></p>
+                            <p class="next-deadline-tz">Denver: <span id="same-day-2-next-denver">--</span></p>
+                        </div>
+                    </div>
+
+                    <div class="countdown-card same-day">
+                        <div class="countdown-header">
+                            <h3>Same Day Window 3</h3>
+                            <span class="window-type same-day-badge">Same Day</span>
+                        </div>
+                        <div class="countdown-timer" id="same-day-3-timer">
+                            <span class="countdown-time">--:--:--</span>
+                        </div>
+                        <div class="countdown-details">
+                            <p class="countdown-description">Late afternoon same-day processing window</p>
+                            <p class="next-deadline">Next deadline (ET): <span id="same-day-3-next">--</span></p>
+                            <p class="next-deadline-tz">UTC: <span id="same-day-3-next-utc">--</span></p>
+                            <p class="next-deadline-tz">Lisbon: <span id="same-day-3-next-lisbon">--</span></p>
+                            <p class="next-deadline-tz">Denver: <span id="same-day-3-next-denver">--</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Next Day Windows -->
+                    <div class="countdown-card next-day">
+                        <div class="countdown-header">
+                            <h3>Overnight Window</h3>
+                            <span class="window-type next-day-badge">Next Day</span>
+                        </div>
+                        <div class="countdown-timer" id="next-day-1-timer">
+                            <span class="countdown-time">--:--:--</span>
+                        </div>
+                        <div class="countdown-details">
+                            <p class="countdown-description">Early morning next-day processing window</p>
+                            <p class="next-deadline">Next deadline (ET): <span id="next-day-1-next">--</span></p>
+                            <p class="next-deadline-tz">UTC: <span id="next-day-1-next-utc">--</span></p>
+                            <p class="next-deadline-tz">Lisbon: <span id="next-day-1-next-lisbon">--</span></p>
+                            <p class="next-deadline-tz">Denver: <span id="next-day-1-next-denver">--</span></p>
+                        </div>
+                    </div>
+
+                    <div class="countdown-card next-day">
+                        <div class="countdown-header">
+                            <h3>Evening Window</h3>
+                            <span class="window-type next-day-badge">Next Day</span>
+                        </div>
+                        <div class="countdown-timer" id="next-day-2-timer">
+                            <span class="countdown-time">--:--:--</span>
+                        </div>
+                        <div class="countdown-details">
+                            <p class="countdown-description">Evening next-day processing window</p>
+                            <p class="next-deadline">Next deadline (ET): <span id="next-day-2-next">--</span></p>
+                            <p class="next-deadline-tz">UTC: <span id="next-day-2-next-utc">--</span></p>
+                            <p class="next-deadline-tz">Lisbon: <span id="next-day-2-next-lisbon">--</span></p>
+                            <p class="next-deadline-tz">Denver: <span id="next-day-2-next-denver">--</span></p>
+                            <p class="window-restriction">Sunday through Thursday only</p>
+                        </div>
+                    </div>
+
+                    <div class="countdown-card next-day">
+                        <div class="countdown-header">
+                            <h3>Late Evening Window</h3>
+                            <span class="window-type next-day-badge">Next Day</span>
+                        </div>
+                        <div class="countdown-timer" id="next-day-3-timer">
+                            <span class="countdown-time">--:--:--</span>
+                        </div>
+                        <div class="countdown-details">
+                            <p class="countdown-description">Late evening next-day processing window</p>
+                            <p class="next-deadline">Next deadline (ET): <span id="next-day-3-next">--</span></p>
+                            <p class="next-deadline-tz">UTC: <span id="next-day-3-next-utc">--</span></p>
+                            <p class="next-deadline-tz">Lisbon: <span id="next-day-3-next-lisbon">--</span></p>
+                            <p class="next-deadline-tz">Denver: <span id="next-day-3-next-denver">--</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processing Timetable Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Processing Timetable</h2>
+                    <p class="section-description">Complete schedule with timezone conversions</p>
+                </div>
+
+                <div class="table-container">
+                    <table class="timetable">
+                        <thead>
+                            <tr>
+                                <th>Window Name</th>
+                                <th>Type</th>
+                                <th>Submission Deadline</th>
+                                <th>Settlement Time</th>
+                                <th>UTC</th>
+                                <th>Denver (MDT)</th>
+                                <th>ET (EDT)</th>
+                                <th>Lisbon (WEST)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="timetable-body">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="notes-section">
+                    <h3>Important Notes</h3>
+                    <ul class="notes-list">
+                        <li>ACH processing occurs on business days only (Monday-Friday, excluding federal holidays)</li>
+                        <li>Same Day ACH limit: $1,000,000 per transaction</li>
+                        <li>All times shown are submission deadlines. Banks may have earlier internal cutoffs</li>
+                        <li>Evening Window operates Sunday through Thursday only</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
