@@ -88,34 +88,59 @@ function isEveningWindowDay(date) {
   return day >= 0 && day <= 4; // Sunday (0) through Thursday (4)
 }
 
-// Get next deadline for a window
+// Get next deadline for a window (converts ET time to user's local timezone)
 function getNextDeadline(timeStr, isNextDay = false, hasRestriction = false) {
   const now = new Date();
   const [hours, minutes] = timeStr.split(':').map(Number);
   
-  let deadline = new Date(now);
-  deadline.setHours(hours, minutes, 0, 0);
+  // Create deadline for today in ET timezone, then convert to local
+  let currentDate = new Date();
+  let deadline = createDeadlineInLocalTime(currentDate, hours, minutes);
   
-  // If deadline has passed today, move to next occurrence
+  // If deadline has passed today, move to next business day
   if (deadline <= now) {
-    if (isNextDay) {
-      deadline = getNextBusinessDay(deadline);
-      deadline.setHours(hours, minutes, 0, 0);
-    } else {
-      deadline = getNextBusinessDay(deadline);
-      deadline.setHours(hours, minutes, 0, 0);
-    }
+    currentDate = getNextBusinessDay(currentDate);
+    deadline = createDeadlineInLocalTime(currentDate, hours, minutes);
   }
   
   // Handle Evening Window restriction (Sun-Thu only)
   if (hasRestriction) {
-    while (!isEveningWindowDay(deadline)) {
-      deadline = getNextBusinessDay(deadline);
-      deadline.setHours(hours, minutes, 0, 0);
+    // Keep checking until we find a valid day (Sunday-Thursday in ET)
+    while (!isValidEveningWindowDay(deadline)) {
+      currentDate = getNextBusinessDay(currentDate);
+      deadline = createDeadlineInLocalTime(currentDate, hours, minutes);
     }
   }
   
   return deadline;
+}
+
+// Create a deadline in local time from ET time
+function createDeadlineInLocalTime(date, hours, minutes) {
+  // Format the date to get it in ET timezone
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  
+  // Create a date object representing the deadline time in ET
+  // We'll use a simple approach: create the time as if it's local, then adjust
+  const localDeadline = new Date(year, date.getMonth(), date.getDate(), hours, minutes, 0, 0);
+  
+  // Calculate the ET offset for this date
+  const etTime = new Date(localDeadline.toLocaleString("en-US", {timeZone: "America/New_York"}));
+  const localTime = new Date(localDeadline.toLocaleString());
+  const offsetMs = localTime.getTime() - etTime.getTime();
+  
+  // Apply the offset to convert from ET to local time
+  return new Date(localDeadline.getTime() + offsetMs);
+}
+
+// Check if a date (in local time) corresponds to Sun-Thu in ET timezone
+function isValidEveningWindowDay(localDate) {
+  const etDateStr = localDate.toLocaleString("en-US", {timeZone: "America/New_York"});
+  const etDate = new Date(etDateStr);
+  const etDay = etDate.getDay();
+  return etDay >= 0 && etDay <= 4; // Sunday (0) through Thursday (4)
 }
 
 // Format countdown time
